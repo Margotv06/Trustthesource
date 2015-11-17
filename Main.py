@@ -74,3 +74,4 @@ class MainInterface(wx.Frame):
 # Instantiate and run
 app = MainInterface()
 app.run()
+i = 10
