@@ -5,7 +5,7 @@ Main Class
 import wx
 
 
-class MainInterface(wx.Frame):
+class TestHelloWorld(wx.Frame):
     def __init__(self):
         # Every wx app must create one App object
         # before it does anything else using wx.
@@ -72,6 +72,5 @@ class MainInterface(wx.Frame):
         self.app.MainLoop()
 
 # Instantiate and run
-app = MainInterface()
+app = TestHelloWorld()
 app.run()
-i = 10
