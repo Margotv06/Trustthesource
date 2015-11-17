@@ -30,6 +30,10 @@ class ViewWindow(wx.Frame):
                           parent=None,
                           title='Trust the Source',
                           size=(1600,900))
+        sb = wx.Frame.CreateStatusBar(self,name="statusBar")
+        status_bar = wx.Frame.SetStatusBar(self,sb)
+        wx.Frame.SetStatusText(self,"Welcome to Trust the Source")
+
 
     def run(self):
         #run the app
