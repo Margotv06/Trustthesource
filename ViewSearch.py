@@ -11,10 +11,9 @@ Creation Date:
     
 Class: 
     
-Contributers:
+Contributors:
 
 Description:
-    This is the Main class that would be run to start the program.
 
 ChangeLog:
 
