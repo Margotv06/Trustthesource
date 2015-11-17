@@ -1,6 +1,6 @@
 """
 This is Trust The Source
-Main Class  Daniël
+Main Class  Daniël en Michaël
 """
 import wx
 
