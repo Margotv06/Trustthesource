@@ -24,3 +24,4 @@ import ViewWindow
 class Main():
     def __init__(self):
         view_window = ViewWindow()
+

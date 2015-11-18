@@ -29,6 +29,7 @@ class ViewWindow(wx.Frame):
         # setting main window
         wx.Frame.__init__(self,
                           parent=None,
+                          id=1,
                           title='Trust the Source')
         # setting the window on maximized view
         self.Maximize(True)
