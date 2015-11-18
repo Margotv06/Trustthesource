@@ -19,7 +19,7 @@ ChangeLog:
     17-11-2015_12:51: Creation of the Class
 """
 import wx
-
+import ViewGeneral
 
 class ViewWindow(wx.Frame):
 
@@ -29,7 +29,6 @@ class ViewWindow(wx.Frame):
         # setting main window
         wx.Frame.__init__(self,
                           parent=None,
-                          id=1,
                           title='Trust the Source')
         # setting the window on maximized view
         self.Maximize(True)
@@ -38,6 +37,15 @@ class ViewWindow(wx.Frame):
         # creating and setting menuBar
         ViewWindow.create_menu_bar(self)
         self.SetStatusText("Initializing main view")
+
+        # adding general panel test
+        ViewWindow.create_general(self)
+
+    def create_general(self):
+        self.panelGeneral = ViewGeneral.ViewGeneral(self)
+        self.sizer = wx.BoxSizer(wx.VERTICAL)
+        self.sizer.Add(self.panelGeneral, 1, wx.EXPAND)
+        self.SetSizer(self.sizer)
 
     def create_statusbar(self):
         sb = wx.Frame.CreateStatusBar(self, name="statusBar")
