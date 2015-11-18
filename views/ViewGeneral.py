@@ -34,16 +34,9 @@ class ViewGeneral(wx.Panel):
         st1 = wx.StaticText(self, label='Welcome to the homepage.')
         st1.SetFont(font)
         hbox1.Add(st1, flag=wx.RIGHT, border=8)
-        vbox.Add(hbox1, flag=wx.EXPAND|wx.LEFT|wx.RIGHT|wx.TOP, border=10)
+        vbox.Add(hbox1, flag=wx.ALIGN_CENTER_HORIZONTAL|wx.LEFT|wx.RIGHT|wx.TOP, border=10)
 
         vbox.Add((-1, 10))
-
-        hbox5 = wx.BoxSizer(wx.HORIZONTAL)
-        btn1 = wx.Button(self, label='Ok', size=(70, 30))
-        hbox5.Add(btn1)
-        btn2 = wx.Button(self, label='Close', size=(70, 30))
-        hbox5.Add(btn2, flag=wx.LEFT|wx.BOTTOM, border=5)
-        vbox.Add(hbox5, flag=wx.ALIGN_RIGHT|wx.RIGHT, border=10)
 
         self.SetSizer(vbox)
 

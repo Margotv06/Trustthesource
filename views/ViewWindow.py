@@ -19,7 +19,9 @@ ChangeLog:
     17-11-2015_12:51: Creation of the Class
 """
 import wx
-import ViewGeneral
+
+from views import ViewGeneral
+
 
 class ViewWindow(wx.Frame):
 
