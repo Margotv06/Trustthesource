@@ -7,22 +7,14 @@
 
 Created by Daniel Slobben, Michael van der Veen & Margot Verleg
 
-Creation Date:
-    17-11-2015
-Class:
-    Main
+Creation Date: 
+    
+Class: 
+    
 Contributors:
-    Michael van der Veen
+
 Description:
-    This is the Main class that would be run to start the program.
 
 ChangeLog:
-17-11-2015_12:34: Creation of this Class.
+
 """
-from views import ViewWindow
-
-
-class Main():
-    def __init__(self):
-        view_window = ViewWindow()
-
