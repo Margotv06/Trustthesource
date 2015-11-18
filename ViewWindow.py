@@ -20,23 +20,68 @@ ChangeLog:
 """
 import wx
 
-class ViewWindow(wx.Frame):
-    def __init__(self):
-        #creating App object for using wx
-        self.app = wx.App()
 
-        #setting main window
+class ViewWindow(wx.Frame):
+
+    def __init__(self):
+        # creating App object for using wx
+        self.app = wx.App()
+        # setting main window
         wx.Frame.__init__(self,
                           parent=None,
-                          title='Trust the Source',
-                          size=(1600,900))
-        sb = wx.Frame.CreateStatusBar(self,name="statusBar")
-        status_bar = wx.Frame.SetStatusBar(self,sb)
-        wx.Frame.SetStatusText(self,"Welcome to Trust the Source")
+                          title='Trust the Source')
+        # setting the window on maximized view
+        self.Maximize(True)
+        # creating and setting status bar
+        ViewWindow.create_statusbar(self)
+        # creating and setting menuBar
+        ViewWindow.create_menu_bar(self)
+        self.SetStatusText("Initializing main view")
 
+    def create_statusbar(self):
+        sb = wx.Frame.CreateStatusBar(self, name="statusBar")
+        self.SetStatusBar(sb)
+        self.SetStatusText("Status Bar initialized")
+
+    # Creating menu bar
+    def create_menu_bar(self):
+        menu_bar = wx.MenuBar()
+        # File menu
+        file_menu = wx.Menu()
+        file_new = file_menu.Append(wx.ID_NEW, 'New Search Window', 'new search window')
+        file_exit = file_menu.Append(wx.ID_EXIT, 'Exit\tCtrl+Q', 'Exit application')
+        menu_bar.Append(file_menu, '&File')
+        # Help
+        help_menu = wx.Menu()
+        help_about = help_menu.Append(wx.ID_ABOUT, 'About', 'Show information about Trust The Source')
+        help_help = help_menu.Append(wx.ID_HELP, 'Help', 'Show Help menu')
+        menu_bar.Append(help_menu, '&Help')
+        # setting final bar as menu bar
+        self.SetMenuBar(menu_bar)
+
+        # Action listeners
+        # FileMenu listeners
+        self.Bind(wx.EVT_MENU, self.menu_file_exit, file_exit)
+        self.Bind(wx.EVT_MENU, self.menu_file_new_window, file_new)
+        # HelpMenu listeners
+        self.Bind(wx.EVT_MENU, self.menu_help_about, help_about)
+        self.Bind(wx.EVT_MENU, self.menu_help_help, help_help)
+
+    def menu_file_exit(self, e):
+        print("exiting")
+        self.Close()
+
+    def menu_file_new_window(self, e):
+        print("new window")
+
+    def menu_help_about(self, e):
+        print("show about menu")
+
+    def menu_help_help(self, e):
+        print('show help menu')
 
     def run(self):
-        #run the app
+        # run the app
         self.Show()
         self.app.MainLoop()
 
