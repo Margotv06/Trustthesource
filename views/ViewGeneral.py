@@ -25,20 +25,41 @@ class ViewGeneral(wx.Panel):
     def __init__(self, parent):
         """Constructor"""
         wx.Panel.__init__(self, parent=parent)
+
         font = wx.SystemSettings_GetFont(wx.SYS_SYSTEM_FONT)
-        font.SetPointSize(11)
+        font.SetPointSize(9)
 
         vbox = wx.BoxSizer(wx.VERTICAL)
 
         hbox1 = wx.BoxSizer(wx.HORIZONTAL)
-        st1 = wx.StaticText(self, label='Welcome to the homepage.')
-        st1.SetFont(font)
-        hbox1.Add(st1, flag=wx.RIGHT, border=8)
-        vbox.Add(hbox1, flag=wx.ALIGN_CENTER_HORIZONTAL|wx.LEFT|wx.RIGHT|wx.TOP, border=10)
+        welcomeText = wx.StaticText(self, label='Welcome to the overview!')
+        welcomeText.SetFont(font)
+        hbox1.Add(welcomeText, flag=wx.ALL, border=12)
+        vbox.Add(hbox1, flag=wx.LEFT|wx.RIGHT|wx.TOP|wx.ALIGN_CENTER, border=10)
 
         vbox.Add((-1, 10))
 
+        hbox2 = wx.BoxSizer(wx.HORIZONTAL)
+        infoText = wx.StaticText(self, label='Information')
+        infoText.SetFont(font)
+        hbox2.Add(infoText, flag=wx.LEFT, border=10)
+        vbox.Add(hbox2, flag=wx.ALL | wx.TOP, border=12)
+
+        vbox.Add((-1, 10))
+
+        hbox3 = wx.BoxSizer(wx.HORIZONTAL)
+        buttonForm = wx.Button(self, label='Select a twitter message', size=(200, 50))
+        hbox3.Add(buttonForm, proportion=1)
+        buttonHistory = wx.Button(self, label='View your search history', size=(200, 50))
+        hbox3.Add(buttonHistory, proportion=1)
+
+        vbox.Add(hbox3, proportion=1, flag=wx.LEFT|wx.RIGHT,
+            border=10)
+
+        vbox.Add((-1, 25))
+
         self.SetSizer(vbox)
+
 
         self.Centre()
         self.Show()
