@@ -1,9 +1,9 @@
 """
-  _____               _     _____ _            ____
- |_   _| __ _   _ ___| |_  |_   _| |__   ___  / ___|  ___  _   _ _ __ ___ ___
-   | || '__| | | / __| __|   | | | '_ \ / _ \ \___ \ / _ \| | | | '__/ __/ _ \
-   | || |  | |_| \__ \ |_    | | | | | |  __/  ___) | (_) | |_| | | | (_|  __/
-   |_||_|   \__,_|___/\__|   |_| |_| |_|\___| |____/ \___/ \__,_|_|  \___\___|
+  _____ _ _____ _ ____
+ |_ _| __ _ _ ___| |_ |_ _| |__ ___ / ___| ___ _ _ _ __ ___ ___
+   | || '__| | | / __| __| | | | '_ \ / _ \ \___ \ / _ \| | | | '__/ __/ _ \
+   | || | | |_| \__ \ |_ | | | | | | __/ ___) | (_) | |_| | | | (_| __/
+   |_||_| \__,_|___/\__| |_| |_| |_|\___| |____/ \___/ \__,_|_| \___\___|
 
 Created by Daniel Slobben, Michael van der Veen & Margot Verleg
 
@@ -19,6 +19,7 @@ ChangeLog:
     17-11-2015_12:51: Creation of the Class
 """
 import wx
+import wx.grid as gridlib
 
 from views import ViewGeneral
 
@@ -31,28 +32,30 @@ class ViewWindow(wx.Frame):
         # setting main window
         wx.Frame.__init__(self,
                           parent=None,
+                          id=1,
                           title='Trust the Source')
+
         # setting the window on maximized view
-        self.Maximize(True)
+        # self.Maximize(True)
         # creating and setting status bar
-        ViewWindow.create_statusbar(self)
+        ViewWindow.create_status_bar(self)
         # creating and setting menuBar
         ViewWindow.create_menu_bar(self)
-        self.SetStatusText("Initializing main view")
-
+        # creating the inside of the frame layout
+        ViewWindow.create_inside_frame(self)
         # adding general panel test
-        ViewWindow.create_general(self)
+        #ViewWindow.create_general(self, 3)
+        #ViewWindow.create_general(self, 4)
 
-    def create_general(self):
+    def create_general(self, id):
         self.panelGeneral = ViewGeneral.ViewGeneral(self)
         self.sizer = wx.BoxSizer(wx.VERTICAL)
-        self.sizer.Add(self.panelGeneral, 1, wx.EXPAND)
+        self.sizer.Add(self.panelGeneral, id, wx.EXPAND)
         self.SetSizer(self.sizer)
 
-    def create_statusbar(self):
+    def create_status_bar(self):
         sb = wx.Frame.CreateStatusBar(self, name="statusBar")
         self.SetStatusBar(sb)
-        self.SetStatusText("Status Bar initialized")
 
     # Creating menu bar
     def create_menu_bar(self):
@@ -83,18 +86,45 @@ class ViewWindow(wx.Frame):
         self.Close()
 
     def menu_file_new_window(self, e):
-        print("new window")
+        self.SetStatusText("New window clicked")
 
     def menu_help_about(self, e):
-        print("show about menu")
+        self.SetStatusText("Show about menu")
 
     def menu_help_help(self, e):
-        print('show help menu')
+        self.SetStatusText("Show Help menu")
+
+    def create_inside_frame(self):
+
+        splitter = wx.SplitterWindow(self)
+        leftP = LeftPanel(splitter)
+        rightP = ViewGeneral.ViewGeneral(splitter)
+
+        # split the window
+        splitter.SplitVertically(leftP, rightP)
+        splitter.SetMinimumPaneSize(20)
+
+        sizer = wx.BoxSizer(wx.VERTICAL)
+        sizer.Add(splitter, 1, wx.EXPAND)
+        self.SetSizer(sizer)
 
     def run(self):
         # run the app
+        self.Centre()
         self.Show()
         self.app.MainLoop()
+
+########################################################################
+class LeftPanel(wx.Panel):
+    """"""
+
+    #----------------------------------------------------------------------
+    def __init__(self, parent):
+        """Constructor"""
+        wx.Panel.__init__(self, parent=parent, id=4)
+        txt = wx.TextCtrl(self)
+
+
 
 app = ViewWindow()
 app.run()

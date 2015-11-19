@@ -7,10 +7,10 @@
 
 Created by Daniel Slobben, Michael van der Veen & Margot Verleg
 
-Creation Date: 
-    
-Class: 
-    
+Creation Date:
+
+Class:
+
 Contributors:
 
 Description:
