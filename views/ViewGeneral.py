@@ -26,11 +26,14 @@ class ViewGeneral(wx.Panel):
         """Constructor"""
         wx.Panel.__init__(self, parent=parent)
 
+        # Setting the font for the text in this panel
         font = wx.SystemSettings_GetFont(wx.SYS_SYSTEM_FONT)
         font.SetPointSize(9)
 
+        # Making the vertical box for the BoxSizer
         vbox = wx.BoxSizer(wx.VERTICAL)
 
+        # Making the title
         hbox1 = wx.BoxSizer(wx.HORIZONTAL)
         welcomeText = wx.StaticText(self, label='Welcome to the overview!')
         welcomeText.SetFont(font)
@@ -39,6 +42,7 @@ class ViewGeneral(wx.Panel):
 
         vbox.Add((-1, 10))
 
+        # Making a static text
         hbox2 = wx.BoxSizer(wx.HORIZONTAL)
         infoText = wx.StaticText(self, label='Information')
         infoText.SetFont(font)
@@ -47,17 +51,19 @@ class ViewGeneral(wx.Panel):
 
         vbox.Add((-1, 10))
 
+        # Making the buttons
         hbox3 = wx.BoxSizer(wx.HORIZONTAL)
         buttonForm = wx.Button(self, label='Select a twitter message', size=(200, 50))
         hbox3.Add(buttonForm, proportion=1)
         buttonHistory = wx.Button(self, label='View your search history', size=(200, 50))
-        hbox3.Add(buttonHistory, proportion=1)
+        hbox3.Add(buttonHistory, proportion=1, flag=wx.LEFT, border=12)
 
         vbox.Add(hbox3, proportion=1, flag=wx.LEFT|wx.RIGHT,
             border=10)
 
         vbox.Add((-1, 25))
 
+        # Setting the sizer for this panel
         self.SetSizer(vbox)
 
 
