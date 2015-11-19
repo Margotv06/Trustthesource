@@ -19,7 +19,6 @@ ChangeLog:
     17-11-2015_12:51: Creation of the Class
 """
 import wx
-import wx.grid as gridlib
 
 from views import ViewGeneral
 
@@ -33,7 +32,9 @@ class ViewWindow(wx.Frame):
         wx.Frame.__init__(self,
                           parent=None,
                           id=1,
-                          title='Trust the Source')
+                          title='Trust the Source',
+                          size=(800, 600))
+        ViewWindow.SetMinSize(self, minSize=(800, 600))
 
         # setting the window on maximized view
         # self.Maximize(True)
@@ -49,7 +50,7 @@ class ViewWindow(wx.Frame):
 
     def create_general(self, id):
         self.panelGeneral = ViewGeneral.ViewGeneral(self)
-        self.sizer = wx.BoxSizer(wx.VERTICAL)
+        self.sizer = wx.BoxSizer(wx.VERTICAL | wx.FIXED_MINSIZE)
         self.sizer.Add(self.panelGeneral, id, wx.EXPAND)
         self.SetSizer(self.sizer)
 
@@ -105,7 +106,7 @@ class ViewWindow(wx.Frame):
         splitter.SetMinimumPaneSize(20)
 
         sizer = wx.BoxSizer(wx.VERTICAL)
-        sizer.Add(splitter, 1, wx.EXPAND)
+        sizer.Add(splitter, 1, wx.EXPAND | wx.FIXED_MINSIZE)
         self.SetSizer(sizer)
 
     def run(self):
@@ -123,6 +124,8 @@ class LeftPanel(wx.Panel):
         """Constructor"""
         wx.Panel.__init__(self, parent=parent, id=4)
         txt = wx.TextCtrl(self)
+        LeftPanel.SetMinSize(self, minSize=(200, 400))
+        LeftPanel.SetBackgroundColour(self,wx.RED)
 
 
 
