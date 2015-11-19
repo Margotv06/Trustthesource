@@ -22,10 +22,9 @@ import wx
 
 class ViewGeneral(wx.Panel):
 
-    def __init__(self, parent):
-        """Constructor"""
-        wx.Panel.__init__(self, parent=parent)
 
+
+    def initUI(self):
         # Setting the font for the text in this panel
         font = wx.SystemSettings_GetFont(wx.SYS_SYSTEM_FONT)
         font.SetPointSize(9)
@@ -54,9 +53,11 @@ class ViewGeneral(wx.Panel):
         # Making the buttons
         hbox3 = wx.BoxSizer(wx.HORIZONTAL)
         buttonForm = wx.Button(self, label='Select a twitter message', size=(200, 50))
-        hbox3.Add(buttonForm, proportion=1)
+        buttonForm.Bind(wx.EVT_BUTTON, self.listenerForm)
+        hbox3.Add(buttonForm, proportion=10)
         buttonHistory = wx.Button(self, label='View your search history', size=(200, 50))
-        hbox3.Add(buttonHistory, proportion=1, flag=wx.LEFT, border=12)
+        buttonHistory.Bind(wx.EVT_BUTTON, self.listenerHistory)
+        hbox3.Add(buttonHistory, proportion=9, flag=wx.LEFT, border=12)
 
         vbox.Add(hbox3, proportion=1, flag=wx.LEFT|wx.RIGHT,
             border=10)
@@ -65,7 +66,17 @@ class ViewGeneral(wx.Panel):
 
         # Setting the sizer for this panel
         self.SetSizer(vbox)
+    # This function gets called when the button gets clicked
+    def listenerForm(self, event):
+        print "form"
 
+    # This function gets called when the button gets clicked
+    def listenerHistory(self, event):
+        print "history"
 
+    def __init__(self, parent):
+        """Constructor"""
+        wx.Panel.__init__(self, parent=parent)
+        self.initUI()
         self.Centre()
         self.Show()
