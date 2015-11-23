@@ -1,6 +1,6 @@
 """
   _____ _ _____ _ ____
- |_ _| __ _ _ ___| |_ |_ _| |__ ___ / ___| ___ _ _ _ __ ___ ___
+ |_ _| ___ _ ___| |_ |_ _| |__ ___ / ___| ___ _ _ _ __ ___ ___
    | || '__| | | / __| __| | | | '_ \ / _ \ \___ \ / _ \| | | | '__/ __/ _ \
    | || | | |_| \__ \ |_ | | | | | | __/ ___) | (_) | |_| | | | (_| __/
    |_||_| \__,_|___/\__| |_| |_| |_|\___| |____/ \___/ \__,_|_| \___\___|
@@ -28,22 +28,33 @@ class ViewWindow(wx.Frame):
     def __init__(self):
         # creating App object for using wx
         self.app = wx.App()
+        print("init frames")
         # setting main window
         wx.Frame.__init__(self,
                           parent=None,
                           id=1,
                           title='Trust the Source',
                           size=(800, 600))
-        ViewWindow.SetMinSize(self, minSize=(800, 600))
 
+
+
+        # ViewWindow.create_view(self)
+
+    def runer(self):
+        self.run()
+
+    def create_view(self):
+        print("creating view")
+        self.SetMinSize((800, 600))
         # setting the window on maximized view
         # self.Maximize(True)
         # creating and setting status bar
-        ViewWindow.create_status_bar(self)
+        self.statusbar = ViewWindow.__create_status_bar(self)
         # creating and setting menuBar
-        ViewWindow.create_menu_bar(self)
+        self.__create_menu_bar()
         # creating the inside of the frame layout
-        ViewWindow.create_inside_frame(self)
+        self.create_inside_frame()
+        print("ending view creation")
         # adding general panel test
         #ViewWindow.create_general(self, 3)
         #ViewWindow.create_general(self, 4)
@@ -54,12 +65,13 @@ class ViewWindow(wx.Frame):
         self.sizer.Add(self.panelGeneral, id, wx.EXPAND)
         self.SetSizer(self.sizer)
 
-    def create_status_bar(self):
+    def __create_status_bar(self):
         sb = wx.Frame.CreateStatusBar(self, name="statusBar")
         self.SetStatusBar(sb)
+        return sb
 
     # Creating menu bar
-    def create_menu_bar(self):
+    def __create_menu_bar(self):
         menu_bar = wx.MenuBar()
         # File menu
         file_menu = wx.Menu()
@@ -98,12 +110,12 @@ class ViewWindow(wx.Frame):
     def create_inside_frame(self):
 
         splitter = wx.SplitterWindow(self)
-        leftP = LeftPanel(splitter)
-        rightP = ViewGeneral.ViewGeneral(splitter)
+        left_menu = LeftContent(splitter)
+        content = ViewGeneral.ViewGeneral(splitter)
 
         # split the window
-        splitter.SplitVertically(leftP, rightP)
-        splitter.SetMinimumPaneSize(20)
+        splitter.SplitVertically(left_menu, content)
+        splitter.SetMinimumPaneSize(200)
 
         sizer = wx.BoxSizer(wx.VERTICAL)
         sizer.Add(splitter, 1, wx.EXPAND | wx.FIXED_MINSIZE)
@@ -116,18 +128,23 @@ class ViewWindow(wx.Frame):
         self.app.MainLoop()
 
 ########################################################################
-class LeftPanel(wx.Panel):
+class LeftContent(wx.Panel):
     """"""
-
     #----------------------------------------------------------------------
     def __init__(self, parent):
         """Constructor"""
-        wx.Panel.__init__(self, parent=parent, id=4)
+        wx.Panel.__init__(self, parent=parent, id=2)
         txt = wx.TextCtrl(self)
-        LeftPanel.SetMinSize(self, minSize=(200, 400))
-        LeftPanel.SetBackgroundColour(self,wx.RED)
+        LeftContent.SetMinSize(self, minSize=(200, 400))
+        LeftContent.SetBackgroundColour(self, wx.RED)
 
 
 
-app = ViewWindow()
-app.run()
+########################################################################
+class RightContent(wx.Panel):
+    """"""
+    #-------------------------------------------------------------------
+    def __init__(self, parent):
+        """Constructor"""
+        wx.Panel.__init__(self, parent=parent, id=3)
+

@@ -20,9 +20,29 @@ ChangeLog:
 17-11-2015_12:34: Creation of this Class.
 """
 from views import ViewWindow
+import wx
 
 
-class Main():
+class Main:
     def __init__(self):
-        view_window = ViewWindow()
+        print("test")
+        self.App = wx.App()
 
+    def started(self):
+        print("started")
+
+    def create_view(self):
+        print("first")
+        window = ViewWindow.ViewWindow()
+
+        print("before")
+        window.create_view()
+        print("after")
+        window.runer()
+        print("runner")
+
+this = Main()
+this.started()
+this.create_view()
+
+print("end  of main code")
